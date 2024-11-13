@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <!-- Navbar Header -->
+    <div class="main-header">
+        <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+                <a href="../index.html" class="logo">
+                    <img src="~/assets/img/kaiadmin/logo_light.svg"
+                         alt="navbar brand"
+                         class="navbar-brand"
+                         height="20" />
+                </a>
+                <div class="nav-toggle">
+                    <button class="btn btn-toggle toggle-sidebar">
+                        <i class="gg-menu-right"></i>
+                    </button>
+                    <button class="btn btn-toggle sidenav-toggler">
+                        <i class="gg-menu-left"></i>
+                    </button>
+                </div>
+                <button class="topbar-toggler more">
+                    <i class="gg-more-vertical-alt"></i>
+                </button>
+            </div>
+            <!-- End Logo Header -->
+        </div>
+    </div>
+    <!-- End Navbar -->
+
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Kategoriler</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="#">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Category</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Index</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Kategori Listesi</h4>
+                                <a class="btn btn-primary btn-round ms-auto" href="/Admin/Category/Add"
+                                    <i class="fa fa-plus"></i>
+                                    Kategori Ekle
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="categoryTable" class="display table table-striped table-hover" width="100%">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="copyright">
+                @DateTime.Now.Year, made with <i class="fa fa-heart heart text-danger"></i> by
+                Aykut Öztürk
+            </div>
+        </div>
+    </footer>
+</div>
+
+@section Scripts {
+    <script src="~/js/Admin/category.js"></script>
+}

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CafeMenu Admin Panel</title>
+
+    @await Html.PartialAsync("_AdminStylePartial")
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @await Html.PartialAsync("_AdminScriptPartial")
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

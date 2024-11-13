@@ -1,0 +1,31 @@
+﻿@model UserForLoginDto
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Kullanıcı Giriş Ekranı</h1>
+</div>
+
+<form method="post" asp-controller="Auth" asp-action="Login">
+    <div class="form-group row mt-3">
+        <label class="col-sm-4 form-label" asp-for="Username">Kullanıcı Adı</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="text" asp-for="Username" />
+        </div>
+    </div>
+
+    <div class="form-group row mt-3">
+        <label class="col-sm-4 form-label" asp-for="Password">Şifre</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="text" asp-for="Password" />
+        </div>
+    </div>
+
+    @* <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto"> *@
+    <div class="input-group mt-3 ml-5">
+        <button type="submit" class="btn btn-primary col-md-5">Giriş Yap</button> &nbsp; &nbsp; &nbsp;
+        <a href="/Admin/Auth/Register" class="btn btn-secondary col-md-5">Üye Ol</a>
+    </div>
+</form>
