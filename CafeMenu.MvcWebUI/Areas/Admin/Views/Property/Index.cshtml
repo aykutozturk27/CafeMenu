@@ -1,10 +1,10 @@
-﻿@model CategoryAddDto
-@{
-    ViewData["Title"] = "Add";
+﻿@{
+    ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="main-panel">
+    <!-- Navbar Header -->
     <div class="main-header">
         <div class="main-header-logo">
             <!-- Logo Header -->
@@ -35,7 +35,7 @@
     <div class="container">
         <div class="page-inner">
             <div class="page-header">
-                <h3 class="fw-bold mb-3">Kategoriler</h3>
+                <h3 class="fw-bold mb-3">Özellikler</h3>
                 <ul class="breadcrumbs mb-3">
                     <li class="nav-home">
                         <a href="#">
@@ -46,13 +46,13 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/Admin/Category/Index">Category</a>
+                        <a href="/Admin/Property/Index">Property</a>
                     </li>
                     <li class="separator">
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Add</a>
+                        <a href="#">Index</a>
                     </li>
                 </ul>
             </div>
@@ -61,36 +61,18 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Kategori Ekle</h4>
+                                <h4 class="card-title">Kategori Listesi</h4>
+                                <a class="btn btn-primary btn-round ms-auto" href="/Admin/Property/Add">
+                                    <i class="fa fa-plus"></i>
+                                    Özellik Ekle
+                                </a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" asp-controller="Category" asp-action="Add">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group form-group-default">
-                                            <label asp-for="ParentCategoryId" class="col-sm-4 form-label">Ana Kategori</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(x => x.ParentCategoryId, (SelectList)ViewBag.Categories, "Kategori Seçiniz...", new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group form-group-default">
-                                            <label asp-for="CategoryName" class="col-sm-4 form-label">Kategori Adı</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" asp-for="CategoryName" />
-                                                <span asp-validation-for="CategoryName" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group form-group-default">
-                                            <button type="submit" class="btn btn-warning">Ekle</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                            <div class="table-responsive">
+                                <table id="propertyTable" class="display table table-striped table-hover" width="100%">
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,3 +89,8 @@
         </div>
     </footer>
 </div>
+
+@section Scripts {
+    <script src="~/js/Admin/property.js"></script>
+}
+

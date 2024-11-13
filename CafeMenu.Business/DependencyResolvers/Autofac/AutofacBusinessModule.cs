@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using CafeMenu.Business.Abstract;
 using CafeMenu.Business.Concrete.Managers;
-using CafeMenu.Core.Utilities.Security.JWT;
 using CafeMenu.DataAccess.Abstract;
 using CafeMenu.DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +16,9 @@ namespace CafeMenu.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<CategoryManager>().As<ICategoryService>();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
+
+            builder.RegisterType<PropertyManager>().As<IPropertyService>();
+            builder.RegisterType<EfPropertyDal>().As<IPropertyDal>();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();

@@ -48,7 +48,8 @@ namespace CafeMenu.Business.Concrete.Managers
         public IResult Delete(CategoryDeleteDto categoryDeleteDto)
         {
             var category = _categoryDal.Get(x => x.CategoryId == categoryDeleteDto.CategoryId);
-            categoryDeleteDto.IsDeleted = true;
+            category.IsDeleted = true;
+
             var deletedCategory = _categoryDal.Update(category);
 
             if (deletedCategory == null)
@@ -59,28 +60,39 @@ namespace CafeMenu.Business.Concrete.Managers
 
         public IDataResult<CategoryListDto> GetAll()
         {
-            var categoryList = _categoryDal.GetList(includeProperties: x => x.User);
+            var categoryList = _categoryDal.GetList(filter: x => !x.IsDeleted, includeProperties: x => x.User);
             var mappedCategoryList = _mapper.Map<CategoryListDto>(categoryList);
             return new SuccessDataResult<CategoryListDto>(mappedCategoryList, Messages.CategoriesListed);
         }
 
-        public IDataResult<CategoryDto> GetById(int categoryId)
+        public IDataResult<CategoryListDto> GetAllWithParentCategory()
+        {
+            var categoryList = _categoryDal.GetList(filter: x => x.ParentCategoryId == 0,includeProperties: x => x.User);
+            var mappedCategoryList = _mapper.Map<CategoryListDto>(categoryList);
+            return new SuccessDataResult<CategoryListDto>(mappedCategoryList, Messages.CategoriesListed);
+        }
+
+        public IDataResult<CategoryUpdateDto> GetById(int categoryId)
         {
             var category = _categoryDal.Get(x => x.CategoryId == categoryId);
-            var mappedCategory = _mapper.Map<CategoryDto>(category);
-            return new SuccessDataResult<CategoryDto>(mappedCategory, Messages.CategoryListed);
+            var mappedCategory = _mapper.Map<CategoryUpdateDto>(category);
+            return new SuccessDataResult<CategoryUpdateDto>(mappedCategory, Messages.CategoryListed);
         }
 
         public IResult Update(CategoryUpdateDto categoryUpdateDto)
         {
-            var category = _mapper.Map<Category>(categoryUpdateDto);
+            int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+
+            var category = _categoryDal.Get(x => x.CategoryId == categoryUpdateDto.CategoryId);
 
             var updateCategory = new Category
             {
-                CategoryId = category.CategoryId,
-                CategoryName = category.CategoryName,
-                ParentCategoryId = category.ParentCategoryId,
-                CreatorUserId = category.CreatorUserId
+                CategoryId = categoryUpdateDto.CategoryId,
+                CategoryName = categoryUpdateDto.CategoryName,
+                ParentCategoryId = categoryUpdateDto.ParentCategoryId,
+                CreatorUserId = creatorUserId,
+                CreatedDate = category.CreatedDate,
+                IsDeleted = category.IsDeleted
             };
 
             var updatedCategory = _categoryDal.Update(updateCategory);

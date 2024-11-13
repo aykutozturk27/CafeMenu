@@ -32,7 +32,7 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
 
         public IActionResult Add()
         {
-            var categoryList = _categoryService.GetAll();
+            var categoryList = _categoryService.GetAllWithParentCategory();
             ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
             return View();
         }
@@ -45,22 +45,26 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
                 var result = _categoryService.Add(categoryAddDto);
                 return RedirectToAction("Index");
             }
-
-            var categoryList = _categoryService.GetAll();
-            ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
             return View(categoryAddDto);
         }
 
-        public IActionResult Update()
+        public IActionResult Update(int categoryId)
         {
-            return View();
+            var categoryList = _categoryService.GetAllWithParentCategory();
+            ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
+            var selectedCategory = _categoryService.GetById(categoryId);
+            return View(selectedCategory.Data);
         }
 
         [HttpPost]
         public IActionResult Update(CategoryUpdateDto categoryUpdateDto)
         {
-            var result = _categoryService.Update(categoryUpdateDto);
-            return Json(result.Message);
+            if (ModelState.IsValid)
+            {
+                var result = _categoryService.Update(categoryUpdateDto);
+                return RedirectToAction("Index");
+            }
+            return View(categoryUpdateDto);
         }
 
         [HttpPost]

@@ -31,5 +31,16 @@
         public static string ErrorWhileNamedProductAdded = " adlı ürün eklenirken bir hata oluştu!";
         public static string ErrorWhileNamedProductUpdated = " adlı ürün güncellenirken bir hata oluştu!";
         public static string ErrorWhileNamedProductDeleted = " adlı ürün silinirken bir hata oluştu!";
+
+        public static string PropertiesListed = "Özellikler listelendi.";
+        public static string PropertyListed = "Özellik listelendi.";
+        public static string NamedPropertyAdded = " adlı özellik eklendi.";
+        public static string NamedPropertyUpdated = " adlı özellik güncellendi.";
+        public static string NamedPropertyDeleted = " adlı özellik silindi.";
+        public static string ErrorWhileNamedPropertyAdded = " adlı özellik eklenirken bir hata oluştu!";
+        public static string ErrorWhileNamedPropertyUpdated = " adlı özellik güncellenirken bir hata oluştu!";
+        public static string ErrorWhileNamedPropertyDeleted = " adlı özellik silinirken bir hata oluştu!";
+        public static string PropertyKeyIsNotEmpty = "Özellik anahtar adı boş geçilemez!";
+        public static string PropertyValueIsNotEmpty = "Özellik değer adı boş geçilemez!";
     }
 }

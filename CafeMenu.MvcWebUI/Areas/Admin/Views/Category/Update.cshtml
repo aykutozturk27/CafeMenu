@@ -1,6 +1,6 @@
-﻿@model CategoryAddDto
+﻿@model CategoryUpdateDto
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Update";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -52,7 +52,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Add</a>
+                        <a href="#">Update</a>
                     </li>
                 </ul>
             </div>
@@ -65,7 +65,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" asp-controller="Category" asp-action="Add">
+                            <form method="post" asp-controller="Category" asp-action="Update">
+                                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group form-group-default">
@@ -86,7 +87,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group form-group-default">
-                                            <button type="submit" class="btn btn-warning">Ekle</button>
+                                            <button type="submit" class="btn btn-warning">Güncelle</button>
                                         </div>
                                     </div>
                                 </div>

@@ -1,18 +1,18 @@
-﻿$('#categoryTable').DataTable({
+﻿$('#propertyTable').DataTable({
     pageLength: 10,
     "columnDefs": [
         {
             "render": function (data, type, row) {
                 return `
-                     <button type="button" data-bs-toggle="tooltip" title="" data-id="${row.categoryId}" class="btn btn-link btn-primary btn-lg btn-update" data-original-title="Güncelle">
+                     <button type="button" data-bs-toggle="tooltip" title="" data-id="${row.propertyId}" class="btn btn-link btn-primary btn-lg btn-update" data-original-title="Güncelle">
                         <i class="fa fa-edit"></i>
                      </button>
-                     <button type="button" data-bs-toggle="tooltip" title="" data-id="${row.categoryId}" class="btn btn-link btn-danger btn-delete" data-original-title="Sil">
+                     <button type="button" data-bs-toggle="tooltip" title="" data-id="${row.propertyId}" class="btn btn-link btn-danger btn-delete" data-original-title="Sil">
                         <i class="fa fa-times"></i>
                      </button>
                     `;
             },
-            "targets": 3
+            "targets": 2
         }
     ],
     "scrollX": true,
@@ -32,33 +32,32 @@
             '</select> results'
     },
     "ajax": {
-        "url": "/Admin/Category/GetAll",
+        "url": "/Admin/Property/GetAll",
         "type": "GET",
-        "dataSrc": "categories"
+        "dataSrc": "properties"
     },
     "columns": [
-        { "title": "Ana Kategori", "data": "parentCategoryName", "className": "text-center" },
-        { "title": "Oluşturan Kullanıcı", "data": "user.fullName", "className": "text-center" },
-        { "title": "Kategori Adı", "data": "categoryName", "className": "text-center" },
+        { "title": "Anahtar Adı", "data": "key", "className": "text-center" },
+        { "title": "Değer Adı", "data": "value", "className": "text-center" },
         { "title": "İşlemler", "data": null, "defaultContent": "", "className": "text-center" },
     ],
 });
 
-$('#categoryTable tbody').on('click', '.btn-update', function () {
-    var data = $('#categoryTable').DataTable().row($(this).parents('tr')).data();
-    window.location.href = '/Admin/Category/Update?categoryId=' + data.categoryId;
+$('#propertyTable tbody').on('click', '.btn-update', function () {
+    var data = $('#propertyTable').DataTable().row($(this).parents('tr')).data();
+    window.location.href = '/Admin/Property/Update?propertyId=' + data.propertyId;
 });
 
-$('#categoryTable tbody').on('click', '.btn-delete', function () {
-    var data = $('#categoryTable').DataTable().row($(this).parents('tr')).data();
+$('#propertyTable tbody').on('click', '.btn-delete', function () {
+    var data = $('#propertyTable').DataTable().row($(this).parents('tr')).data();
     $.ajax({
-        url: '/Admin/Category/Delete',
+        url: '/Admin/Property/Delete',
         type: 'POST',
-        data: { categoryId: data.categoryId },
+        data: { propertyId: data.propertyId },
         success: function (response) {
             if (response) {
                 Swal.fire("Silindi", "", "success");
-                $('#categoryTable').DataTable().ajax.reload();
+                $('#propertyTable').DataTable().ajax.reload();
             } else {
                 Swal.fire("Error!", "Ürün durumu güncellenirken bir hata oluştu.", "error");
             }

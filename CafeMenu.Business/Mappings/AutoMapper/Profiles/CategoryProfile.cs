@@ -10,7 +10,6 @@ namespace CafeMenu.Business.Mappings.AutoMapper.Profiles
         {
             CreateMap<List<Category>, CategoryListDto>()
                 .ForMember(x => x.Categories, y => y.MapFrom(z => z.ToList())).ReverseMap();
-            CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, CategoryAddDto>().ReverseMap();
             CreateMap<Category, CategoryUpdateDto>().ReverseMap();
             CreateMap<Category, CategoryDeleteDto>().ReverseMap();
