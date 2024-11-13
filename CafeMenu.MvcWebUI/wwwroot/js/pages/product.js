@@ -22,7 +22,7 @@
     },
     "columns": [
         { "title": "Ürün Adı", "data": "productName" },
-        { "title": "Resim", "data": "imagePAth" },
+        { "title": "Resim", "data": "imagePath" },
         { "title": "Kategori Adı", "data": "categoryName" },
         { "title": "Fiyat", "data": "price" },
         { "title": "Oluşturulma Tarihi", "data": "createdDate" }

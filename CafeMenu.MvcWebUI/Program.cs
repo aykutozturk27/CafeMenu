@@ -3,8 +3,10 @@ using Autofac.Extensions.DependencyInjection;
 using CafeMenu.Business.DependencyResolvers.Autofac;
 using CafeMenu.Core.Utilities.Security.Encryption;
 using CafeMenu.Core.Utilities.Security.JWT;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,12 +24,14 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+builder.Services.AddFluentValidationAutoValidation();
+
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(opts =>
     {
-        opts.Cookie.Name = "CafeMenuCookie";   
+        opts.Cookie.Name = "CafeMenuCookie";
         opts.LoginPath = "/Admin/Auth/Login";
         opts.LogoutPath = "/Admin/Auth/Logout";
         opts.SlidingExpiration = true;
@@ -48,7 +52,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddSession(options =>
 {
-    options.Cookie.Name = $"CafeMenuCookie"; 
+    options.Cookie.Name = $"CafeMenuCookie";
     options.IdleTimeout = TimeSpan.FromMinutes(180);
     options.Cookie.IsEssential = true;
 });
@@ -68,14 +72,11 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "areas",
-        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+app.MapControllerRoute(
+   name: "areas",
+   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+   name: "default",
+   pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
