@@ -34,11 +34,11 @@
     "ajax": {
         "url": "/Admin/ProductProperty/GetAll",
         "type": "GET",
-        "dataSrc": "properties"
+        "dataSrc": "productProperties"
     },
     "columns": [
-        { "title": "Anahtar Adı", "data": "key", "className": "text-center" },
-        { "title": "Değer Adı", "data": "value", "className": "text-center" },
+        { "title": "Ürün Adı", "data": "product.productName", "className": "text-center" },
+        { "title": "Özellik Adı", "data": "property.key", "className": "text-center" },
         { "title": "İşlemler", "data": null, "defaultContent": "", "className": "text-center" },
     ],
 });

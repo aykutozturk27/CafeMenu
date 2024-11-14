@@ -44,15 +44,15 @@
                 return '<a href="' + data + '"target="_blank" ><img src="' + data + '" alt="' + row.imagePath + '" height="100px"> </a>';
             }
         },
-        { "title": "Kategori Adı", "data": "category.Name", "className": "text-center" },
-        { "title": "Kullanıcı Adı", "data": "user.FullName", "className": "text-center" },
+        { "title": "Kategori Adı", "data": "category.categoryName", "className": "text-center" },
+        { "title": "Kullanıcı Adı", "data": "user.username", "className": "text-center" },
         { "title": "İşlemler", "data": null, "defaultContent": "", "className": "text-center" },
     ],
 });
 
 $('#productTable tbody').on('click', '.btn-update', function () {
     var data = $('#productTable').DataTable().row($(this).parents('tr')).data();
-    window.location.href = '/Admin/Product/Update?propertyId=' + data.propertyId;
+    window.location.href = '/Admin/Product/Update?productId=' + data.productId;
 });
 
 $('#productTable tbody').on('click', '.btn-delete', function () {

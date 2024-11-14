@@ -66,6 +66,7 @@
                         </div>
                         <div class="card-body">
                             <form method="post" asp-controller="ProductProperty" asp-action="Update">
+                                <input type="hidden" name="ProductPropertyId" value="@Model.ProductPropertyId" />
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group form-group-default">

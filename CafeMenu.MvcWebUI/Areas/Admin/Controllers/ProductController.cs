@@ -43,6 +43,9 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
                 var result = _productService.Add(productAddDto, formFile);
                 return RedirectToAction("Index");
             }
+
+            var categoryList = _categoryService.GetAll();
+            ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
             return View(productAddDto);
         }
 
@@ -50,8 +53,8 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
         {
             var categoryList = _categoryService.GetAll();
             ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
-            var selectedProperty = _productService.GetById(productId);
-            return View(selectedProperty.Data);
+            var selectedProduct = _productService.GetById(productId);
+            return View(selectedProduct.Data);
         }
 
         [HttpPost]
@@ -62,6 +65,9 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
                 var result = _productService.Update(productUpdateDto, formFile);
                 return RedirectToAction("Index");
             }
+
+            var categoryList = _categoryService.GetAll();
+            ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
             return View(productUpdateDto);
         }
 

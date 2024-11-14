@@ -33,7 +33,14 @@ namespace CafeMenu.Business.Concrete.Managers
             if (addedProductProperty == null)
                 return new ErrorResult(addedProductProperty.Product.ProductName + Messages.ErrorWhileNamedPropertyAdded);
 
-            return new SuccessResult(addedProductProperty.Product.ProductName + Messages.NamedPropertyAdded);
+            var addedProductPropertyResult = _productPropertyDal.Get(filter: x => x.ProductPropertyId == addedProductProperty.ProductPropertyId,
+                includeProperties: new Expression<Func<ProductProperty, object>>[]
+                {
+                    x => x.Property,
+                    y => y.Product
+                }
+            );
+            return new SuccessResult(addedProductPropertyResult.Product.ProductName + Messages.NamedPropertyAdded);
         }
 
         public IResult Delete(ProductPropertyDeleteDto productPropertyDeleteDto)
@@ -82,10 +89,17 @@ namespace CafeMenu.Business.Concrete.Managers
 
         public IResult Update(ProductPropertyUpdateDto productPropertyUpdateDto)
         {
-            var product = _productPropertyDal.Get(x => x.ProductPropertyId == productPropertyUpdateDto.ProductPropertyId);
+            var product = _productPropertyDal.Get(x => x.ProductPropertyId == productPropertyUpdateDto.ProductPropertyId,
+                includeProperties: new Expression<Func<ProductProperty, object>>[]
+                {
+                    x => x.Property,
+                    y => y.Product
+                }
+            );
 
             var updateProductProperty = new ProductProperty
             {
+                ProductPropertyId = productPropertyUpdateDto.ProductPropertyId,
                 ProductId = product.ProductId,
                 PropertyId = product.PropertyId
             };

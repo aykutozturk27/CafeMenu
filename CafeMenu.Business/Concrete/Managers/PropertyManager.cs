@@ -39,9 +39,9 @@ namespace CafeMenu.Business.Concrete.Managers
         {
             var property = _propertyDal.Get(x => x.PropertyId == propertyDeleteDto.PropertyId);
 
-            var deletedCategory = _propertyDal.Delete(property);
+            var deletedProperty = _propertyDal.Delete(property);
 
-            if (!deletedCategory)
+            if (!deletedProperty)
                 return new ErrorResult(property.Key + Messages.ErrorWhileNamedPropertyDeleted);
 
             return new SuccessResult(property.Key + Messages.NamedPropertyDeleted);
@@ -65,13 +65,14 @@ namespace CafeMenu.Business.Concrete.Managers
         {
             var property = _propertyDal.Get(x => x.PropertyId == propertyUpdateDto.PropertyId);
 
-            var updateCategory = new Property
+            var updateProperty = new Property
             {
+                PropertyId = propertyUpdateDto.PropertyId,
                 Key = propertyUpdateDto.Key,
                 Value = propertyUpdateDto.Value
             };
 
-            var updatedProperty = _propertyDal.Update(updateCategory);
+            var updatedProperty = _propertyDal.Update(updateProperty);
             if (updatedProperty == null)
                 return new ErrorResult(property.Key + Messages.ErrorWhileNamedPropertyUpdated);
 

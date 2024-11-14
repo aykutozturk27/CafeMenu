@@ -18,7 +18,7 @@ namespace CafeMenu.DataAccess.Concrete.EntityFramework.Mappings
             builder.Property(u => u.IsDeleted).HasColumnName("IsDeleted").HasColumnType("bit");
             builder.Property(u => u.CreatedDate).HasColumnName("CreatedDate").HasColumnType("datetime");
 
-            builder.HasOne(x => x.Category).WithMany(y => y.Products).HasForeignKey(x => x.CategoryId);
+            builder.HasOne(x => x.Category).WithMany(y => y.Products).HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.User).WithMany(x => x.Products).HasForeignKey(x => x.CreatorUserId).OnDelete(DeleteBehavior.Restrict).IsRequired(false);
         }
     }

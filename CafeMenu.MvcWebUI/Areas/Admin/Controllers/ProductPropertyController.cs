@@ -49,6 +49,12 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
                 var result = _productPropertyService.Add(productPropertyAddDto);
                 return RedirectToAction("Index");
             }
+
+            var productList = _productService.GetAll();
+            ViewBag.Products = new SelectList(productList.Data.Products, "ProductId", "ProductName");
+
+            var propertyList = _propertyService.GetAll();
+            ViewBag.Properties = new SelectList(propertyList.Data.Properties, "PropertyId", "Key");
             return View(productPropertyAddDto);
         }
 
@@ -70,8 +76,15 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var result = _productPropertyService.Update(productPropertyUpdateDto);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "ProductProperty");
             }
+
+            var productList = _productService.GetAll();
+            ViewBag.Products = new SelectList(productList.Data.Products, "ProductId", "ProductName");
+
+            var propertyList = _propertyService.GetAll();
+            ViewBag.Properties = new SelectList(propertyList.Data.Properties, "PropertyId", "Key");
+
             return View(productPropertyUpdateDto);
         }
 

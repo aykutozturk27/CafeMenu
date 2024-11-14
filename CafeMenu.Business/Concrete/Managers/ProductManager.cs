@@ -38,6 +38,7 @@ namespace CafeMenu.Business.Concrete.Managers
                 Price = product.Price,
                 ImagePath = product.ImagePath,
                 CreatorUserId = creatorUserId,
+                CategoryId = product.CategoryId,
                 IsDeleted = false,
                 CreatedDate = DateTime.Now
             };
@@ -89,7 +90,8 @@ namespace CafeMenu.Business.Concrete.Managers
                 ProductName = product.ProductName,
                 Price = product.Price,
                 ImagePath = product.ImagePath,
-                CreatorUserId = creatorUserId
+                CreatorUserId = creatorUserId,
+                CategoryId = product.CategoryId,
             };
 
             var updatedProduct = _productDal.Update(updateProduct);
