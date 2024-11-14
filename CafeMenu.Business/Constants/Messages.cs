@@ -25,6 +25,7 @@
         public static string CategoryNameIsNotEmpty = "Kategori adı boş geçilemez!";
 
         public static string ProductsListed = "Ürünler listelendi.";
+        public static string ProductListed = "Ürün listelendi.";
         public static string NamedProductAdded = " adlı ürün eklendi.";
         public static string NamedProductUpdated = " adlı ürün güncellendi.";
         public static string NamedProductDeleted = " adlı ürün silindi.";

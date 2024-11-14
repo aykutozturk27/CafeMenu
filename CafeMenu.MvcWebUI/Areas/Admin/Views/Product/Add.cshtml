@@ -1,4 +1,4 @@
-﻿@model CategoryAddDto
+﻿@model ProductAddDto
 @{
     ViewData["Title"] = "Add";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -35,7 +35,7 @@
     <div class="container">
         <div class="page-inner">
             <div class="page-header">
-                <h3 class="fw-bold mb-3">Kategoriler</h3>
+                <h3 class="fw-bold mb-3">Ürünler</h3>
                 <ul class="breadcrumbs mb-3">
                     <li class="nav-home">
                         <a href="#">
@@ -46,7 +46,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/Admin/Category/Index">Category</a>
+                        <a href="/Admin/Product/Index">Product</a>
                     </li>
                     <li class="separator">
                         <i class="icon-arrow-right"></i>
@@ -61,26 +61,44 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Kategori Ekle</h4>
+                                <h4 class="card-title">Ürün Ekle</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" asp-controller="Category" asp-action="Add">
+                            <form method="post" asp-controller="Product" asp-action="Add">
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-md-12">
                                         <div class="form-group form-group-default">
-                                            <label asp-for="ParentCategoryId" class="col-sm-4 form-label">Ana Kategori</label>
+                                            <label asp-for="ProductName" class="col-sm-4 form-label">Ürün Adı</label>
                                             <div class="col-sm-8">
-                                                @Html.DropDownListFor(x => x.ParentCategoryId, (SelectList)ViewBag.Categories, "Kategori Seçiniz...", new { @class = "form-control" })
+                                                <input type="text" class="form-control" asp-for="ProductName" />
+                                                <span asp-validation-for="ProductName" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group form-group-default">
-                                            <label asp-for="CategoryName" class="col-sm-4 form-label">Kategori Adı</label>
+                                            <label asp-for="Price" class="col-sm-4 form-label">Fiyat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" asp-for="CategoryName" />
-                                                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                                                <input type="number" class="form-control" asp-for="Price" />
+                                                <span asp-validation-for="Price" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label for="formFile" class="col-sm-4 form-label">Ürün Resmi</label>
+                                            <div class="col-sm-8">
+                                                <input type="file" class="form-control" id="formFile" name="formFile" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label asp-for="CategoryId" class="col-sm-4 form-label">Kategori Adı</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => x.CategoryId, (SelectList)ViewBag.Categories, "Kategori Seçiniz...", new { @class = "form-control" })
+                                                <span asp-validation-for="CategoryId" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>

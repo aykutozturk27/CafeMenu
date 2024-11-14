@@ -60,14 +60,14 @@ namespace CafeMenu.Business.Concrete.Managers
 
         public IDataResult<CategoryListDto> GetAll()
         {
-            var categoryList = _categoryDal.GetList(filter: x => !x.IsDeleted, includeProperties: x => x.User);
+            var categoryList = _categoryDal.GetList(x => !x.IsDeleted, x => x.User);
             var mappedCategoryList = _mapper.Map<CategoryListDto>(categoryList);
             return new SuccessDataResult<CategoryListDto>(mappedCategoryList, Messages.CategoriesListed);
         }
 
         public IDataResult<CategoryListDto> GetAllWithParentCategory()
         {
-            var categoryList = _categoryDal.GetList(filter: x => x.ParentCategoryId == 0,includeProperties: x => x.User);
+            var categoryList = _categoryDal.GetList(x => x.ParentCategoryId == 0, x => x.User);
             var mappedCategoryList = _mapper.Map<CategoryListDto>(categoryList);
             return new SuccessDataResult<CategoryListDto>(mappedCategoryList, Messages.CategoriesListed);
         }
