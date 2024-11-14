@@ -1,0 +1,110 @@
+﻿@model ProductPropertyAddDto
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="main-header">
+        <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+                <a href="../index.html" class="logo">
+                    <img src="~/assets/img/kaiadmin/logo_light.svg"
+                         alt="navbar brand"
+                         class="navbar-brand"
+                         height="20" />
+                </a>
+                <div class="nav-toggle">
+                    <button class="btn btn-toggle toggle-sidebar">
+                        <i class="gg-menu-right"></i>
+                    </button>
+                    <button class="btn btn-toggle sidenav-toggler">
+                        <i class="gg-menu-left"></i>
+                    </button>
+                </div>
+                <button class="topbar-toggler more">
+                    <i class="gg-more-vertical-alt"></i>
+                </button>
+            </div>
+            <!-- End Logo Header -->
+        </div>
+    </div>
+    <!-- End Navbar -->
+
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Ürün Özellikleri</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="#">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/ProductProperty/Index">ProductProperty</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Add</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Ürün Özelliği Ekle</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" asp-controller="ProductProperty" asp-action="Add">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label asp-for="ProductId" class="col-sm-4 form-label">Ürün Adı</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => x.ProductId, (SelectList)ViewBag.Products, "Ürün Seçiniz...", new { @class = "form-control" })
+                                                <span asp-validation-for="ProductId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label asp-for="PropertyId" class="col-sm-4 form-label">Özellik Adı</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => x.PropertyId, (SelectList)ViewBag.Properties, "Özellik Seçiniz...", new { @class = "form-control" })
+                                                <span asp-validation-for="PropertyId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <button type="submit" class="btn btn-primary">Ekle</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="copyright">
+                @DateTime.Now.Year, made with <i class="fa fa-heart heart text-danger"></i> by
+                Aykut Öztürk
+            </div>
+        </div>
+    </footer>
+</div>

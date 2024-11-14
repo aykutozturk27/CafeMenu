@@ -5,7 +5,6 @@ using CafeMenu.Core.Utilities.Helpers;
 using CafeMenu.Core.Utilities.Results.Abstract;
 using CafeMenu.Core.Utilities.Results.Concrete;
 using CafeMenu.DataAccess.Abstract;
-using CafeMenu.DataAccess.Concrete.EntityFramework;
 using CafeMenu.Entities.Concrete;
 using CafeMenu.Entities.Dtos;
 using Microsoft.AspNetCore.Http;

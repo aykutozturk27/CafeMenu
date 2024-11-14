@@ -20,6 +20,9 @@ namespace CafeMenu.Business.DependencyResolvers.Autofac
             builder.RegisterType<PropertyManager>().As<IPropertyService>();
             builder.RegisterType<EfPropertyDal>().As<IPropertyDal>();
 
+            builder.RegisterType<ProductPropertyManager>().As<IProductPropertyService>();
+            builder.RegisterType<EfProductPropertyDal>().As<IProductPropertyDal>();
+
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
