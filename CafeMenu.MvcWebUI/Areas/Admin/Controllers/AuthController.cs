@@ -45,6 +45,7 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
                 {
                     var operationClaims = _userService.GetClaims(userToLogin.Data);
                     List<Claim> claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, userToLogin.Data.Username),
                         new Claim("Id",userToLogin.Data.UserId.ToString()),
                         new Claim("Username",userToLogin.Data.Username),
                         new Claim("Name",userToLogin.Data.Name ?? string.Empty),

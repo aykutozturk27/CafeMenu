@@ -15,17 +15,20 @@ namespace CafeMenu.Business.Concrete.Managers
         private readonly ICategoryDal _categoryDal;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserDal _userDal;
 
-        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public CategoryManager(ICategoryDal categoryDal, IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserDal userDal)
         {
             _categoryDal = categoryDal;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            _userDal = userDal;
         }
 
         public IResult Add(CategoryAddDto categoryAddDto)
         {
-            int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+            //int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+            int creatorUserId = _userDal.Get(x => x.Username == _httpContextAccessor.HttpContext.User.Identity.Name).UserId;
 
             var category = _mapper.Map<Category>(categoryAddDto);
 
@@ -81,7 +84,8 @@ namespace CafeMenu.Business.Concrete.Managers
 
         public IResult Update(CategoryUpdateDto categoryUpdateDto)
         {
-            int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+            //int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+            int creatorUserId = _userDal.Get(x => x.Username == _httpContextAccessor.HttpContext.User.Identity.Name).UserId;
 
             var category = _categoryDal.Get(x => x.CategoryId == categoryUpdateDto.CategoryId);
 

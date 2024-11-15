@@ -16,17 +16,20 @@ namespace CafeMenu.Business.Concrete.Managers
         private readonly IProductDal _productDal;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserDal _userDal;
 
-        public ProductManager(IProductDal productDal, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public ProductManager(IProductDal productDal, IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserDal userDal)
         {
             _productDal = productDal;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            _userDal = userDal;
         }
 
         public IResult Add(ProductAddDto productAddDto, IFormFile file)
         {
-            int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+            //int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value); // Kullanıcı ID'si
+            int creatorUserId = _userDal.Get(x => x.Username == _httpContextAccessor.HttpContext.User.Identity.Name).UserId;
 
             var product = _mapper.Map<Product>(productAddDto);
 
@@ -78,7 +81,8 @@ namespace CafeMenu.Business.Concrete.Managers
 
         public IResult Update(ProductUpdateDto productUpdateDto, IFormFile file)
         {
-            int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+            //int creatorUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+            int creatorUserId = _userDal.Get(x => x.Username == _httpContextAccessor.HttpContext.User.Identity.Name).UserId;
 
             var product = _productDal.Get(x => x.ProductId == productUpdateDto.ProductId);
 
