@@ -99,7 +99,7 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login");
+            return Redirect("/Admin/Auth/Login");
         }
     }
 }
