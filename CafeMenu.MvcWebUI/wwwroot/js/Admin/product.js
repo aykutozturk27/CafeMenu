@@ -3,6 +3,12 @@
     "columnDefs": [
         {
             "render": function (data, type, row) {
+                return commaSeparateNumber(data);
+            },
+            "targets": 1
+        },
+        {
+            "render": function (data, type, row) {
                 return `
                      <button type="button" data-bs-toggle="tooltip" title="" data-id="${row.productId}" class="btn btn-link btn-primary btn-lg btn-update" data-original-title="Güncelle">
                         <i class="fa fa-edit"></i>
