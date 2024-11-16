@@ -68,6 +68,10 @@ namespace CafeMenu.Business.Concrete.Managers
         public IDataResult<ProductListDto> GetAll()
         {
             var productList = _productDal.GetList(x => !x.IsDeleted, x => x.User, y => y.Category);
+            foreach (var product in productList)
+            {
+                product.Price = CurrencyHelper.GetCurrency() * product.Price;
+            }
             var mappedProductList = _mapper.Map<ProductListDto>(productList);
             return new SuccessDataResult<ProductListDto>(mappedProductList, Messages.ProductsListed);
         }
