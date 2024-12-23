@@ -45,6 +45,9 @@ namespace CafeMenu.MvcWebUI.Areas.Admin.Controllers
                 var result = _categoryService.Add(categoryAddDto);
                 return RedirectToAction("Index");
             }
+
+            var categoryList = _categoryService.GetAllWithParentCategory();
+            ViewBag.Categories = new SelectList(categoryList.Data.Categories, "CategoryId", "CategoryName");
             return View(categoryAddDto);
         }
 

@@ -6,7 +6,6 @@ using CafeMenu.Core.Utilities.Security.JWT;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
